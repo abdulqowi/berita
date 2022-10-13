@@ -40,4 +40,38 @@ class CategoryController extends Controller
     public function create(){
         return view('categories.create');
     }
+    public function destroy($id) {
+        try {
+            DB::transaction(function() use($id) {
+                DB::table('categories')->where('id', $id)->delete();
+            });
+            $json=[
+                'msg'       =>'success',
+                'status' =>true
+            ];
+        } catch (\PDOException $e) {
+            $json= [
+               'msg' => 'error',
+               'status' => false,
+               'error' => $e,
+            ];
+        };
+        flash('Data berhasil ditambahkan!');      
+        return redirect()->route('categories.index');
+    }
+    public function update(Category $category){
+        $this->validate(request(),[
+            'name' =>'required',
+        ]);
+        
+        $category->update([
+            'name' =>request('name'),
+            'slug' =>Str::slug(request('name')) ,
+        ]);
+        flash('Data berhasil ditambahkan!');
+        return redirect()->route('categories.index');
+    }
+    public function edit(Category $category){
+        return view('categories.edit', compact('category'));
+    }   
 }
