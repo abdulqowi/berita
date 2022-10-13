@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\{UserController, RoleController};
+use App\Http\Controllers\{ExampleController, UserController, RoleController};
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +29,5 @@ Route::middleware('auth')->group(function () {
 
     Route::resources(['users' => UserController::class]);
     Route::resources(['roles' => RoleController::class]);
+    Route::resources(['examples' => ExampleController::class]);
 });
