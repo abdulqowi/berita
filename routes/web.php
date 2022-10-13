@@ -21,4 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::resources(['users' => UserController::class]);
     Route::resources(['roles' => RoleController::class]);
     Route::resources(['examples' => ExampleController::class]);
+    Route::resources(['categories' => CategoryController::class]);
+
 });
