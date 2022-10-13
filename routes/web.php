@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\{ExampleController, HomeController, UserController, RoleController};
+use App\Http\Controllers\{ExampleController, HomeController, UserController, RoleController, CategoryController};
 
 Route::get('/',  [HomeController::class, 'index'])->name('home');
 Route::get('category',  [HomeController::class, 'category'])->name('category');

@@ -12,14 +12,14 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $data = DB::table('Categories')->get();
+        $data = DB::table('categories')->get();
         return view('categories.categories',compact('data'));
     }
     public function store(Request $request){
         $this->validate(request(),[
             'name' =>'required',
         ]);
-        
+
         Category::create([
             'name' =>request('name'),
             'slug' =>Str::slug(request('name')) ,
@@ -56,14 +56,14 @@ class CategoryController extends Controller
                'error' => $e,
             ];
         };
-        flash('Data berhasil ditambahkan!');      
+        flash('Data berhasil ditambahkan!');
         return redirect()->route('categories.index');
     }
     public function update(Category $category){
         $this->validate(request(),[
             'name' =>'required',
         ]);
-        
+
         $category->update([
             'name' =>request('name'),
             'slug' =>Str::slug(request('name')) ,
@@ -73,5 +73,5 @@ class CategoryController extends Controller
     }
     public function edit(Category $category){
         return view('categories.edit', compact('category'));
-    }   
+    }
 }
