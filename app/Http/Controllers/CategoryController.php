@@ -56,7 +56,7 @@ class CategoryController extends Controller
                'error' => $e,
             ];
         };
-        flash('Data berhasil ditambahkan!');
+        flash('Data berhasil dihapus!');
         return redirect()->route('categories.index');
     }
     public function update(Category $category){
