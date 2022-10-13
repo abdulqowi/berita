@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\{ExampleController, UserController, RoleController};
+use App\Http\Controllers\{ExampleController, UserController, RoleController,CategoryController};
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::resources(['users' => UserController::class]);
     Route::resources(['roles' => RoleController::class]);
     Route::resources(['examples' => ExampleController::class]);
+    Route::resources(['categories' => CategoryController::class]);
+
 });

@@ -35,7 +35,7 @@
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Blog
                 </a>
-                <a href="tables-regular.html">
+                <a href="{{route('categories.index')}}">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Kategori
                 </a>
