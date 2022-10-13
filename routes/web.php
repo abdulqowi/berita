@@ -2,30 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\{ExampleController, UserController, RoleController};
+use App\Http\Controllers\{ExampleController, HomeController, UserController, RoleController};
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
+Route::get('/',  [HomeController::class, 'index'])->name('home');
+Route::get('category',  [HomeController::class, 'category'])->name('category');
+Route::get('blog/{blog:slug}',  [HomeController::class, 'show'])->name('blog.show');
 Route::get('login', [LoginController::class, 'showLoginForm']);
-Route::post('login', [LoginController::class,'login'])->name('login');
-Route::post('logout',  [LoginController::class,'logout'])->name('logout');
+Route::post('login', [LoginController::class, 'login'])->name('login');
+Route::post('logout',  [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
+    Route::get('/dashboard', function () {
         return view('home', [
             'title' => 'Home'
         ]);
-    })->name('home');
+    })->name('dashboard');
 
     Route::resources(['users' => UserController::class]);
     Route::resources(['roles' => RoleController::class]);

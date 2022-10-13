@@ -18,8 +18,8 @@ class CreateBlogsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('image')->nullable();
-            $table->string('meta_desc');
-            $table->string('meta_keyword');
+            $table->string('meta_desc')->nullable();
+            $table->string('meta_keyword')->nullable();
             $table->string('body');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

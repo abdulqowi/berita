@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Blog;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +21,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ExampleSeeder::class,
         ]);
+        Blog::factory()->count(50)->create();
+
     }
 }
