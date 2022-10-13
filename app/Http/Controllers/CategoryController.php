@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -15,19 +17,25 @@ class CategoryController extends Controller
     }
     public function store(Request $request){
         $this->validate(request(),[
-            'category' =>'required',
-            'slug' =>'required',
+            'name' =>'required',
         ]);
-        db::transaction(function()use($request)
-        {
-            DB::table('categories')->insert(
-                [
-                    'categories' => $request->categories_name,
-                   'slug' => $request->slug,
-                   'created_at' =>('Y-m-d H:i:s'),
-                ]
-                );
-        });
+        
+        Category::create([
+            'name' =>request('name'),
+            'slug' =>Str::slug(request('name')) ,
+        ]);
+
+        // $json=[
+        //     'msg' => 'berhasil',
+        //     'status' => true
+        // ];
+        // } catch (\Exception $e) {
+        //   $json =[
+        //     'msg' => 'gagal',
+        //     'status' => false
+        //   ]
+        flash('Data berhasil ditambahkan!');
+        return redirect()->route('categories.index');
     }
     public function create(){
         return view('categories.create');

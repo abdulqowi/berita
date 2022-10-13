@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="page-title-actions">
-                    <a href="{{ route('examples.create') }}" class="btn-shadow btn-sm mr-3 btn btn-primary">
+                    <a href="{{ route('categories.create') }}" class="btn-shadow btn-sm mr-3 btn btn-primary">
                         Tambah
                         <i class="fa fa-plus"></i>
                     </a>
@@ -53,10 +53,10 @@
                                     <div class="dropdown d-inline-block">
                                         <a aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn-primary btn-sm text-white"></a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu">
-                                            <form action="{{ route('examples.destroy', $example->id) }}" method="post">
+                                            <form action="{{ route('categories.destroy', $example->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <a href="{{ route('examples.edit', $example->id) }}" tabindex="0" class="dropdown-item">Edit</a>
+                                                <a href="{{ route('categories.edit', $example->id) }}" tabindex="0" class="dropdown-item">Edit</a>
                                                 <button type="submit" class="dropdown-item">Hapus</button>
                                             </form>
                                         </div>
