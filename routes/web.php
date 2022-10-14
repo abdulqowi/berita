@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\{ExampleController, HomeController, UserController, RoleController, CategoryController, BlogController};
+use App\Http\Controllers\{DashboardController, ExampleController, HomeController, UserController, RoleController, CategoryController, BlogController};
 
 
 // Route Autentikasi
@@ -18,12 +18,13 @@ Route::get('category/{category:slug}',  [HomeController::class, 'category'])->na
 
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('home', [
-                'title' => 'Home'
-            ]);
-        })->name('dashboard');
-    
+        // Route::get('/dashboard', function () {
+        //     return view('home', [
+        //         'title' => 'Home'
+        //     ]);
+        // })->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
         Route::resources(['users' => UserController::class]);
         Route::resources(['roles' => RoleController::class]);
         Route::resources(['examples' => ExampleController::class]);

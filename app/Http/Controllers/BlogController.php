@@ -6,12 +6,19 @@ use App\Models\Blog;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\DataTables\BlogsDataTable;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:blog-read', ['only' => ['index','show']]);
+        $this->middleware('permission:blog-create', ['only' => ['create','store']]);
+        $this->middleware('permission:blog-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:blog-delete', ['only' => ['destroy']]);
+    }
+
     public function index(BlogsDataTable $datatable)
     {
         return $datatable->render('blog.blog');

@@ -10,6 +10,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:category-read', ['only' => ['index','show']]);
+        $this->middleware('permission:category-create', ['only' => ['create','store']]);
+        $this->middleware('permission:category-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:category-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $data = DB::table('categories')->get();
