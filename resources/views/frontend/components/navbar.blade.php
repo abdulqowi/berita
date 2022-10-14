@@ -23,7 +23,7 @@
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Tentang Kami</a>
+                    <a class="nav-link" href="{{ route('about_us') }}">Tentang Kami</a>
                 </li>
                 @guest
 
@@ -34,7 +34,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if (auth()->user()->hasRole('Superadmin'))
-                                <a class="dropdown-item" href="{{ route('home') }}">Admin</a>
+                                <a class="dropdown-item" href="{{ route('dashboard') }}">Admin</a>
                             @endif
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item"

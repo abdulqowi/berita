@@ -8,9 +8,10 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $query = request('query');
         return view('frontend.home', [
-            'post_most_viewed' => Blog::orderBy('created_at', 'desc')->limit(5)->get(),
-            'posts' => Blog::latest()->simplePaginate(10),
+            'post_most_viewed' => Blog::orderBy('created_at', 'asc')->limit(5)->get(),
+            'posts' => Blog::where("title", "like", "%$query%")->latest()->simplePaginate(10),
             'categories' => Category::get(),
         ]);
     }
@@ -33,10 +34,17 @@ class HomeController extends Controller
         }
     }
 
-    public function search()
+    public function category(Category $category)
     {
-
+        return view('frontend.home', [
+            'post_most_viewed' => Blog::orderBy('created_at', 'desc')->limit(5)->get(),
+            'posts' => $category->blogs()->latest()->simplePaginate(10),
+            'categories' => Category::get(),
+        ]);
     }
 
-    public function category(){}
+    public function about_us()
+    {
+        return view('frontend.about_us', ['title' => 'Tentang Kami']);
+    }
 }

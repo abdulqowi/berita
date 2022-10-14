@@ -3,12 +3,12 @@
         <ul class="vertical-nav-menu">
             <li class="app-sidebar__heading">Dashboards</li>
             <li>
-                <a href="{{ route('home') }}" class="mm-active">
+                <a href="{{ route('dashboard') }}" class="mm-active">
                     <i class="metismenu-icon pe-7s-rocket"></i>
                     Dashboard
                 </a>
             </li>
-            <li class="app-sidebar__heading">UI Components</li>
+            <li class="app-sidebar__heading">Components</li>
             <li>
                 <a href="#">
                     <i class="metismenu-icon pe-7s-diamond"></i>
@@ -31,7 +31,7 @@
                 </ul>
             </li>
             <li>
-                <a href="tables-regular.html">
+                <a href="{{route('blogs.index')}}"">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Blog
                 </a>

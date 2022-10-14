@@ -36,10 +36,13 @@
                     </div>
                     <div class="my-5">
                         <h1>{{ $post->title }}</h1>
-                        <small class="text-comment"> Penulis : <a href="">{{ $post->user->name }}</a>;
-                            Kategori : @foreach ($post->categories as $category) {{ $category->name }};@endforeach
+                        <small class="text-comment"> Penulis : {{ $post->user->name }};
+                            Kategori : 
+                            @foreach ($post->categories as $category)
+                            <a href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
+                            @endforeach
                             Terbit : {{ date('d-m-Y', strtotime($post->created_at)) }};
-                            <div class="d-flex justify-content-left">
+                            <!-- <div class="d-flex justify-content-left">
                                 @can('update', $post)
                                 <form action="{{ route('post.edit', $post->slug) }}">
                                     <button class="badge badge-success">edit <i class="fas fa-pencil-alt"></i></button>
@@ -52,7 +55,7 @@
                                         <button class="badge badge-danger" type="submit" onclick="return confirm('Apakah yakin ingin menghapus postingan ini?')">hapus <i class="fas fa-trash"></i></button>
                                     </form>
                                 @endcan
-                            </div>
+                            </div> -->
                         </small>
                         <hr>
                         @if ($post->thumbnail)

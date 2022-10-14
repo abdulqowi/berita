@@ -60,19 +60,23 @@
                                     <button type="button" tabindex="0"
                                         class="dropdown-item">Settings</button>
                                     <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                    <button type="button" tabindex="0" class="dropdown-item">Actions</button>
+                                    <a type="button" href="{{ route('home') }}" tabindex="0" class="dropdown-item">Halaman Utama</a>
                                     <div tabindex="-1" class="dropdown-divider"></div>
                                     <button type="button" tabindex="0"
-                                        class="dropdown-item">Dividers</button>
+                                        class="dropdown-item" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">Keluar</button>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <div class="widget-content-left  ml-3 header-user-info">
                             <div class="widget-heading">
-                                Alina Mclourd
+                                {{ auth()->user()->name }}
                             </div>
                             <div class="widget-subheading">
-                                VP People Manager
+                                {{ auth()->user()->getRoleNames()[0] }}
                             </div>
                         </div>
                     </div>

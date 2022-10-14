@@ -24,16 +24,6 @@ class CategoryController extends Controller
             'name' =>request('name'),
             'slug' =>Str::slug(request('name')) ,
         ]);
-
-        // $json=[
-        //     'msg' => 'berhasil',
-        //     'status' => true
-        // ];
-        // } catch (\Exception $e) {
-        //   $json =[
-        //     'msg' => 'gagal',
-        //     'status' => false
-        //   ]
         flash('Data berhasil ditambahkan!');
         return redirect()->route('categories.index');
     }
