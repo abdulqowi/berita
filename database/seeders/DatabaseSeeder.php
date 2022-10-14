@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
             ExampleSeeder::class,
         ]);
         Blog::factory()->count(50)->create();
-
+        $this->call(CategoryPostSeeder::class);
     }
 }

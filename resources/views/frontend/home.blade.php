@@ -35,8 +35,12 @@
                                 <p class="">{!! Str::limit($post->body, 200) !!} Baca selengkapnya</p>
                             </a>
                             <p class="post-meta">
-                                @foreach ($post as $category)
+                                @foreach ($post->categories as $category)
+                                    {{ $category->name }} -
                                 @endforeach
+                                Diposting
+                                {{ $post->created_at->diffForHumans() }}
+                                &nbsp;
                             </p>
                         </div>
                     </div>

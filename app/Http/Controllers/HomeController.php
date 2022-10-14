@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use App\Models\Category;
+use App\Models\{Blog, Category};
 
 class HomeController extends Controller
 {
     public function index()
     {
         return view('frontend.home', [
-            'post_most_viewed' => Blog::limit(5)->get(),
+            'post_most_viewed' => Blog::orderBy('created_at', 'desc')->limit(5)->get(),
             'posts' => Blog::latest()->simplePaginate(10),
             'categories' => Category::get(),
         ]);

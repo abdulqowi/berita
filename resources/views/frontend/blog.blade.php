@@ -62,20 +62,6 @@
                             {!! $post->body !!}
                         </div>
                     </div>
-                    <!-- Button Like -->
-                        <div class="d-flex justify-content-between">
-                            @if (auth()->user() == null)
-                                <div>
-                                    <form action="{{ route('post.like', $post->id) }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary">Like <i class="far fa-thumbs-up"></i></button>
-                                    </form>
-                                </div>
-                            @else
-                            @endif
-
-                        </div>
-
                         <div class="d-flex flex-row my-3">
                             <a href="whatsapp://send?text={{ url($post->slug) }}" class="btn btn-sm btn-success"><i class="fab fa-brands fa-whatsapp"></i></a>
                             <a href="{{ url($post->slug) }}" class="btn btn-sm btn-primary ml-2"><i class="fab fa-facebook"></i></a>
@@ -104,10 +90,10 @@
                             @foreach ($post_related as $post)
                                 <li class="list-group-item">
                                     <div>
-                                        <a href="{{ route('post', $post->slug) }}">{{ $post->title }}</a>
+                                        <a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a>
                                     </div>
                                     <div>
-                                        <a href="{{ route('user.show', $post->user->id) }}" class="text-comment">{{ $post->user->name }}</a><small class="text-comment"> - {{ $post->created_at->diffForHumans() }}</small>
+                                        <a href="" class="text-comment">{{ $post->user->name }}</a><small class="text-comment"> - {{ $post->created_at->diffForHumans() }}</small>
                                     </div>
                                 </li>
                             @endforeach
