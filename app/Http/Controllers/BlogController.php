@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\BlogsDataTable;
 use App\Models\Blog;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\DataTables\BlogsDataTable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rules\KontolJaran;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -23,14 +23,16 @@ class BlogController extends Controller
         return response()->json($blog);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('blog.create');
     }
 
     public function store(Request $request){
         $this->validate(request(),[
-            'title' =>'required',
-            'body' =>'required'
+            'title' =>'required|max:255|unique:blogs',
+            'body' =>'required',
+            'image' => 'image|mimes:jpg,jpeg,png|max:2058',
         ]);
 
         Blog::create([
@@ -48,8 +50,40 @@ class BlogController extends Controller
         return view('blog.edit', compact('blog'));
     }
 
+    public function update(Blog $blog)
+    {
+        $this->validate(request(), [
+            'title' => 'required|max:255|unique:blogs,title,' . $blog->id,
+            'body' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png|max:2058',
+        ]);
+
+        // Pengkondisian update gambar
+        if (request('image')) {
+            // Jika ada request maka delete old img
+            Storage::delete($blog->image);
+            $image = request()->file('image')->store('img/blogs');
+        } elseif ($blog->image) {
+            // jika tidak ada biarkan old image
+            $image = $blog->image;
+        } else {
+            $image = null;
+        }
+
+        $blog->update([
+            'title' => request('title'),
+            'image' => $image,
+            'slug' => Str::slug(request('title')) ,
+            'body' =>request('body'),
+        ]);
+
+        flash('Data berhasil diedit!');
+        return redirect()->route('blogs.index');
+    }
+
     public function destroy(Blog $blog)
     {
+        Storage::delete($blog->image);
         $blog->delete();
         flash('Data berhasil dihapus!');
         return redirect()->route('blogs.index');
