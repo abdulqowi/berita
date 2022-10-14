@@ -33,7 +33,7 @@
                             {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @if (auth()->user()->hasRole('Superadmin'))
+                            @if (auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Author'))
                                 <a class="dropdown-item" href="{{ route('dashboard') }}">Admin</a>
                             @endif
                             <div class="dropdown-divider"></div>

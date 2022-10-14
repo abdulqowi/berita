@@ -9,6 +9,7 @@
                 </a>
             </li>
             <li class="app-sidebar__heading">Components</li>
+            @can('user-read')
             <li>
                 <a href="#">
                     <i class="metismenu-icon pe-7s-diamond"></i>
@@ -30,15 +31,20 @@
                     </li>
                 </ul>
             </li>
+            @endcan
             <li>
+                @can('blog-read')
                 <a href="{{route('blogs.index')}}"">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Blog
                 </a>
+                @endcan
+                @can('category')
                 <a href="{{route('categories.index')}}">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Kategori
                 </a>
+                @endcan
                 <a href="{{ route('examples.index') }}">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Example
