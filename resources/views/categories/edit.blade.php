@@ -13,8 +13,8 @@
                         <div class="page-title-subheading">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="">Examples</a></li>
-                                <li class="active breadcrumb-item" aria-current="page">Tambah Kategori</li>
+                                <li class="breadcrumb-item"><a href="">Kategori</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Edit Kategori</li>
                             </ol>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
 
         <div class="main-card mb-3 card">
             <div class="card-header">
-                <h5 class="card-title">Tambah Example</h5>
+                <h5 class="card-title">Tambah Kategori</h5>
             </div>
             <div class="card-body">
                 <form action="{{ route('categories.update',$category->id) }}" method="post">

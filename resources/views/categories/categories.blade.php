@@ -10,11 +10,11 @@
                         <i class="pe-7s-car icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Example
+                    <div>Kategori
                         <div class="page-title-subheading">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="active breadcrumb-item" aria-current="page">Example</li>
+                                <li class="active breadcrumb-item" aria-current="page">Kategori</li>
                             </ol>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
 
         <div class="main-card mb-3 card">
             <div class="card-header">
-                <h5 class="card-title">Data Example</h5>
+                <h5 class="card-title">Data Kategori</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
