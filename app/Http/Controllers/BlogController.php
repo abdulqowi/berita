@@ -6,6 +6,8 @@ use App\Models\Blog;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\DataTables\BlogsDataTable;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,7 +34,9 @@ class BlogController extends Controller
 
     public function create()
     {
-        return view('blog.create');
+        return view('blog.create', [
+            'categories' => Category::all(),
+        ]);
     }
 
     public function store(Request $request){
@@ -42,7 +46,7 @@ class BlogController extends Controller
             'image' => 'image|mimes:jpg,jpeg,png|max:2058',
         ]);
 
-        Blog::create([
+        $blog = Blog::create([
             'title' =>request('title'),
             'image' =>request('image') ? request()->file('image')->store('img/blogs') : null,
             'slug' =>Str::slug(request('title')) ,
@@ -50,6 +54,8 @@ class BlogController extends Controller
             'body' =>request('body'),
 
         ]);
+
+        $blog->categories()->sync(request('category'));
         flash('Data berhasil ditambahkan!');
         return redirect()->route('blogs.index');
     }
@@ -82,6 +88,7 @@ class BlogController extends Controller
             'image' => $image,
             'slug' => Str::slug(request('title')) ,
             'body' =>request('body'),
+            'category' =>request('category'),
         ]);
 
         flash('Data berhasil diedit!');

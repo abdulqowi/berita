@@ -32,12 +32,15 @@ class CategoryController extends Controller
             'name' =>request('name'),
             'slug' =>Str::slug(request('name')) ,
         ]);
+
+        
         flash('Data berhasil ditambahkan!');
         return redirect()->route('categories.index');
     }
     public function create(){
         return view('categories.create');
     }
+
     public function destroy($id) {
         try {
             DB::transaction(function() use($id) {
