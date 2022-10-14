@@ -52,7 +52,8 @@ class BlogController extends Controller
             'slug' =>Str::slug(request('title')) ,
             'user_id' => Auth::user()->id,
             'body' =>request('body'),
-
+            'meta_desc' =>request('meta_desc'),
+            'meta_keyword' =>request('meta_keyword'),
         ]);
 
         $blog->categories()->sync(request('category'));
@@ -60,7 +61,8 @@ class BlogController extends Controller
         return redirect()->route('blogs.index');
     }
     public function edit(Blog $blog){
-        return view('blog.edit', compact('blog'));
+        $categories = Category::all();
+        return view('blog.edit', compact('blog','categories'));
     }
 
     public function update(Blog $blog)
@@ -88,9 +90,10 @@ class BlogController extends Controller
             'image' => $image,
             'slug' => Str::slug(request('title')) ,
             'body' =>request('body'),
-            'category' =>request('category'),
+            'meta_desc' =>request('meta_desc'),
+            'meta_keyword' =>request('meta_keyword')
         ]);
-
+        $blog->categories()->sync(request('category'));
         flash('Data berhasil diedit!');
         return redirect()->route('blogs.index');
     }

@@ -65,12 +65,20 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                        <label for="meta_desc">Meta Description</label>
-                                        <input name="meta_desc" id="meta_desc"
-                                            placeholder="Masukkan meta deskripsi (tidak wajib)" type="meta_desc"
-                                            class="form-control form-control-xs @error('meta_desc') is-invalid @enderror"
-                                            value="{{ $blog->meta_desc ?? old('meta_desc') }}">
-                                        @error('meta_desc')
+                                        <label for="category">Kategori</label>
+                                        <select name="category" id="category"
+                                            placeholder="Masukkan meta deskripsi (tidak wajib)" type="category"
+                                            class="form-control form-control-xs select2 
+                                            @error('category') is-invalid 
+                                            @enderror"
+                                            value="{{ $blog->category ?? old('category') }}"multiple>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}" {{
+                                                    $blog->categories()->find($category->id) ? 'selected' : ''
+                                                }}>{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('category')
                                             <div class="invalid-feedback" role="alert">
                                                 {{ $message }}
                                             </div>

@@ -39,7 +39,7 @@
                     Blog
                 </a>
                 @endcan
-                @can('category')
+                @can('category-read')
                 <a href="{{route('categories.index')}}">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Kategori
