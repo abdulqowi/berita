@@ -10,7 +10,7 @@
                         <i class="pe-7s-car icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>blog
+                    <div>Blog
                         <div class="page-title-subheading">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
