@@ -24,7 +24,7 @@
                 @include('frontend.components.alert')
                 @foreach ($posts as $post)
                     <div class="card my-3">
-                        @if ($post->thumbnail)
+                        @if ($post->image)
                             <img src="{{ $post->takeImage }}" class="card-img-top" style="height: 250px; object-fit: cover; object-position: center;">
                         @endif
                         <div class="post-preview">

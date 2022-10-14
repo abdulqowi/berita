@@ -1,4 +1,4 @@
-@extends('layouts/app', ['title' => 'Example'])
+@extends('layouts/app', ['title' => 'Kategori'])
 
 @section('content')
 @include('sweetalert::alert')
@@ -38,9 +38,9 @@
                         <thead class="bg-primary text-white">
                             <tr>
                                 <th class="text-center" width="3%">No</th>
-                                <th>Categories</th>
+                                <th>Nama</th>
                                 <th>Slug</th>
-                                <th class="text-center"><i class="fa fa-cogs"></i></th>
+                                <th class="text-center" width="3%"><i class="fa fa-cogs"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +49,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $example->name }}</td>
                                 <td>{{ $example->slug }}</td>
-                                <td>
+                                <td class="text-center">
                                     <div class="dropdown d-inline-block">
                                         <a aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn-primary btn-sm text-white"></a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu">

@@ -1,4 +1,4 @@
-@extends('layouts/app', ['title' => 'Example'])
+@extends('layouts/app', ['title' => 'Blog'])
 
 @section('content')
 @include('sweetalert::alert')
@@ -38,42 +38,18 @@
                         <thead class="bg-primary text-white">
                             <tr>
                                 <th class="text-center" width="3%">No</th>
-                                <th>Blog</th>
+                                <th>Judul</th>
                                 <th>Slug</th>
-                                <th>meta desc</th>
-                                <th>meta keyword</th>
-                                <th>thumbnail</th>
-                                <th>created at</th>
-                                <th>updated at</th>
-                                <th class="text-center"><i class="fa fa-cogs"></i></th>
+                                <!-- <th>meta desc</th> -->
+                                <!-- <th>meta keyword</th> -->
+                                <!-- <th>thumbnail</th> -->
+                                <!-- <th>User</th> -->
+                                <th>Dibuat Oleh</th>
+                                <th class="text-center" width="3%"><i class="fa fa-cogs"></i></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $example)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $example->title }}</td>
-                                <td>{{ $example->slug }}</td>
-                                <td>{{ $example->image}}</td>
-                                <td>{{ $example->meta_desc }}</td>
-                                <td>{{ $example->meta_keyword }}</td>
-                                <td>{{ $example->created_at }}</td>
-                                <td>{{ $example->updated_at }}</td>
-                                <td>
-                                    <div class="dropdown d-inline-block">
-                                        <a aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn-primary btn-sm text-white"></a>
-                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu">
-                                            <form action="{{ route('categories.destroy', $example->id) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="{{ route('categories.edit', $example->id) }}" tabindex="0" class="dropdown-item">Edit</a>
-                                                <button type="submit" class="dropdown-item">Hapus</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
+                            
                         </tbody>
                     </table>
                 </div>
@@ -95,11 +71,86 @@
     <script src="{{ asset('template') }}/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('template') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('template') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script>
+    $(function() {
+        let table = $('#data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
 
-<script>
-$(function() {
-    $('#data-table').DataTable({});
-});
-</script>
+            ajax: "{{ route('blogs.index') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false,
+                    className: 'dt-body-center'
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'slug',
+                    name: 'slug'
+                },
+                {
+                    data: 'user.name',
+                    name: 'user.name'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    className: 'dt-body-center'
+                },
+            ],
+        });
 
+        $('body').on('click', '#showDetails', function () {
+            var blog_id = $(this).data('id');
+            $.get("{{ route('blogs.index') }}" + '/' + blog_id, function(data) {
+                $('#detailsModal').modal('show');
+                $('#title').html(data.title);
+                $('#slug').html(data.slug);
+                $('#meta_desc').html(data.meta_desc);
+                $('#meta_keyword').html(data.meta_keyword);
+                $('#body').html(data.body);
+                $('#image').attr('src', '/storage/' + data.image);
+                $('#createdAt').html(data.created_at);
+                $('#user').html(data.user.name);
+            })
+        })
+    });
+    </script>
+
+<!-- Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModal" style="display: none;"
+aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModal">Blog Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" id="kontol">
+                    <button class="list-group-item-action list-group-item">Judul : <i id="title"></i></button>
+                    <button class="list-group-item-action list-group-item">Gambar : <i><img class="img-fluid" id="image" src="" alt="null"></i></button>
+                    <button class="list-group-item-action list-group-item">Dibuat : <i id="createdAt"></i></button>
+                    <button class="list-group-item-action list-group-item">Dibuat oleh : <i id="user"></i></button>
+                    <button class="list-group-item-action list-group-item">Meta Deskripsi : <i id="meta_desc"></i></button>
+                    <button class="list-group-item-action list-group-item">Meta Keyword : <i id="meta_keyword"></i></button>
+                    <button class="list-group-item-action list-group-item">Isi : <i id="body"></i></button>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

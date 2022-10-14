@@ -61,7 +61,7 @@ class CategoryController extends Controller
         flash('Data berhasil ditambahkan!');
         return redirect()->route('categories.index');
     }
-    public function edit(Category $category){
+        public function edit(Category $category){
         return view('categories.edit', compact('category'));
     }
 }
