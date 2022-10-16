@@ -32,7 +32,7 @@
             <div class="card-header">
                 <h5 class="card-title">Edit blog</h5>
             </div>
-            <div class="card-body">
+            <div class="card-body" >
                 <form action="{{ route('blogs.update', $blog->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -66,7 +66,7 @@
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
                                         <label for="category">Kategori</label>
-                                        <select name="category" id="category"
+                                        <select name="category[]" id="category"
                                             placeholder="Masukkan meta deskripsi (tidak wajib)" type="category"
                                             class="form-control form-control-xs select2 
                                             @error('category') is-invalid 
@@ -102,7 +102,7 @@
                             </div>
                             <div class="position-relative form-group">
                                 <label for="meta_keyword">Meta Keyword <span class="text-danger">*</span></label>
-                                <input name="meta_keyword" id="meta_keyword" placeholder="Masukkan gas crot (tidak wajib)"
+                                <input name="meta_keyword" id="meta_keyword" placeholder="Masukkan keyword (tidak wajib)"
                                     type="meta_keyword"
                                     class="form-control form-control-xs @error('meta_keyword') is-invalid @enderror"
                                     value="{{ $blog->meta_keyword ?? old('meta_keyword') }}">
@@ -145,7 +145,7 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2({
-            'placeholder': 'pilih kontol'
+            'placeholder': 'pilih kategori' 
         });
     });
     ClassicEditor

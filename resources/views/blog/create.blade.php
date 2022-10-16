@@ -76,7 +76,7 @@
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
                                         <label for="meta_keyword">Meta Keyword <span class="text-danger">*</span></label>
-                                        <input name="meta_keyword" id="meta_keyword" placeholder="Masukkan gas crot (tidak wajib)" type="meta_keyword" class="form-control form-control-xs @error('meta_keyword') is-invalid @enderror" value="{{ $blog->meta_keyword ?? old('meta_keyword') }}">
+                                        <input name="meta_keyword" id="meta_keyword" placeholder="Masukkan keyword (tidak wajib)" type="meta_keyword" class="form-control form-control-xs @error('meta_keyword') is-invalid @enderror" value="{{ $blog->meta_keyword ?? old('meta_keyword') }}">
                                         @error('meta_keyword')
                                             <div class="invalid-feedback" role="alert">
                                                 {{ $message }}
@@ -91,7 +91,7 @@
                                 @error('meta_desc')
                                     <div class="invalid-feedback" role="alert">
                                         {{ $message }}
-                                    </div>
+                                    </div> 
                                 @enderror
                             </div>
                         </div>
@@ -126,7 +126,7 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2({
-            'placeholder': 'pilih kontol'
+            'placeholder': 'pilih kategori'
         });
     });
     ClassicEditor
@@ -136,6 +136,7 @@
         } )
         .catch( error => {
                 console.error( error );
-        } );
+        } )
+        ;
 </script>
 @endsection

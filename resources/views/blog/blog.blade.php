@@ -38,13 +38,9 @@
                         <thead class="bg-primary text-white">
                             <tr>
                                 <th class="text-center" width="3%">No</th>
-                                <th>Judul</th>
-                                <th>Slug</th>
-                                <!-- <th>meta desc</th> -->
-                                <!-- <th>meta keyword</th> -->
-                                <!-- <th>thumbnail</th> -->
-                                <!-- <th>User</th> -->
-                                <th>Dibuat Oleh</th>
+                                <th>Judul</th>  
+                                <th>Slug</th>  
+                                <th>User</th>
                                 <th class="text-center" width="3%"><i class="fa fa-cogs"></i></th>
                             </tr>
                         </thead>
@@ -114,6 +110,9 @@
                 $('#detailsModal').modal('show');
                 $('#title').html(data.title);
                 $('#slug').html(data.slug);
+                $.each(data.categories, function (key, value) {
+                    $('#categories').append(`<button class="btn btn-sm btn-primary mr-1 categories">${value.name}</button>`);
+                })
                 $('#meta_desc').html(data.meta_desc);
                 $('#meta_keyword').html(data.meta_keyword);
                 $('#body').html(data.body);
@@ -121,6 +120,7 @@
                 $('#createdAt').html(data.created_at);
                 $('#user').html(data.user.name);
             })
+            $('button.categories').remove();
         })
     });
     </script>
@@ -137,10 +137,12 @@ aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <ul class="list-group" id="kontol">
+                <ul class="list-group">
                     <button class="list-group-item-action list-group-item">Judul : <i id="title"></i></button>
+                    <button class="list-group-item-action list-group-item">Slug : <i id="slug"></i></button>
                     <button class="list-group-item-action list-group-item">Gambar : <i><img class="img-fluid" id="image" src="" alt="null"></i></button>
                     <button class="list-group-item-action list-group-item">Dibuat : <i id="createdAt"></i></button>
+                    <button class="list-group-item-action list-group-item" >Kategori : <i id="categories"></i></button>
                     <button class="list-group-item-action list-group-item">Dibuat oleh : <i id="user"></i></button>
                     <button class="list-group-item-action list-group-item">Meta Deskripsi : <i id="meta_desc"></i></button>
                     <button class="list-group-item-action list-group-item">Meta Keyword : <i id="meta_keyword"></i></button>

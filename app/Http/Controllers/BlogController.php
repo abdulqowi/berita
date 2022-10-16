@@ -10,6 +10,8 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\VarDumper\Cloner\Data;
+use Yajra\DataTables\DataTables;
 
 class BlogController extends Controller
 {
@@ -41,7 +43,7 @@ class BlogController extends Controller
 
     public function store(Request $request){
         $this->validate(request(),[
-            'title' =>'required|max:255|unique:blogs',
+            'title' => 'required|max:255|unique:blogs',
             'body' =>'required',
             'image' => 'image|mimes:jpg,jpeg,png|max:2058',
         ]);
@@ -56,7 +58,7 @@ class BlogController extends Controller
             'meta_keyword' =>request('meta_keyword'),
         ]);
 
-        $blog->categories()->sync(request('category'));
+        // $blog->categories()->sync(request('category'));
         flash('Data berhasil ditambahkan!');
         return redirect()->route('blogs.index');
     }

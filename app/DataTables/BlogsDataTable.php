@@ -47,7 +47,7 @@ class BlogsDataTable extends DataTable
      */
     public function query()
     {
-        return Blog::latest()->with('user')->newQuery();
+        return Blog::latest()->with('user', 'categories')->newQuery();
     }
 
     /**
