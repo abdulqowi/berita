@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use App\Models\Category;
+use App\Models\{Blog,Category};
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 use App\DataTables\BlogsDataTable;
 use App\Http\Requests\BlogStoreRequest;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\UserStoreRequest;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\VarDumper\Cloner\Data;
 
 class BlogController extends Controller
 {

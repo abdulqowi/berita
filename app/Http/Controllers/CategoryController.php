@@ -25,7 +25,7 @@ class CategoryController extends Controller
     }
     public function store(Request $request){
         $this->validate(request(),[
-            'name' =>'required',
+            'name' =>'required|unique:categories',
         ]);
 
         Category::create([
@@ -62,12 +62,13 @@ class CategoryController extends Controller
     }
     public function update(Category $category){
         $this->validate(request(),[
-            'name' =>'required',
+            'name' =>'required|unique:categories,name,' . $category->id,
         ]);
 
         $category->update([
             'name' =>request('name'),
             'slug' =>Str::slug(request('name')) ,
+
         ]);
         flash('Data berhasil ditambahkan!');
         return redirect()->route('categories.index');
