@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 use App\DataTables\BlogsDataTable;
-use App\Models\Category;
+use App\Http\Requests\BlogStoreRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserStoreRequest;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\VarDumper\Cloner\Data;
-use Yajra\DataTables\DataTables;
 
 class BlogController extends Controller
 {
@@ -41,13 +43,8 @@ class BlogController extends Controller
         ]);
     }
 
-    public function store(Request $request){
-        $this->validate(request(),[
-            'title' => 'required|max:255|unique:blogs',
-            'body' =>'required',
-            'image' => 'image|mimes:jpg,jpeg,png|max:2058',
-        ]);
-
+    public function store(BlogStoreRequest $request){
+        $request->validated();
         $blog = Blog::create([
             'title' =>request('title'),
             'image' =>request('image') ? request()->file('image')->store('img/blogs') : null,

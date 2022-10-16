@@ -39,7 +39,7 @@
                         <div class="col-md-6">
                             <div class="position-relative form-group">
                                 <label for="title">Judul <span class="text-danger">*</span></label>
-                                <input name="title" id="title" placeholder="Masukkan judul" type="title" class="form-control form-control-xs @error('title') is-invalid @enderror" value="{{ $blog->title ?? old('title') }}">
+                                <input name="title" id="title" placeholder="Masukkan judul" type="text" class="form-control form-control-xs @error('title') is-invalid @enderror" value="{{ old('title') }}">
                                 @error('title')
                                     <div class="invalid-feedback" role="alert">
                                         {{ $message }}
@@ -61,7 +61,7 @@
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
                                         <label for="category">Kategori <span class="text-danger">*</span></label>
-                                        <select name="category[]" id="category" class="form-control form-control-xs select2 @error('category') is-invalid @enderror" value="{{ $blog->category ?? old('category') }}" multiple>
+                                        <select name="category[]" id="category" class="form-control form-control-xs select2 @error('category') is-invalid @enderror" multiple>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
