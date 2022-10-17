@@ -1,8 +1,8 @@
 @extends('layouts.frontend', compact('title'))
 
 @section('meta')
-    <meta name="title" content="{{ $post->meta_title ?? 'IRP Blog' }}">
-    <meta name="description" content="{{ $post->meta_description ?? 'Sebuah sarana blog publik untuk saling berbagi - Remaja generasi millenial bisa' }}">
+    <meta name="title" content="{{ $post->title ?? 'IRP Blog' }}">
+    <meta name="description" content="{{ $post->meta_desc ?? 'Sebuah sarana blog publik untuk saling berbagi - Remaja generasi millenial bisa' }}">
     <meta name="keyword" content="{{ $post->meta_keyword ?? 'Forum, Remaja, IRP' }}">
     <meta name="image" content="{{ $post->takeImage ?? '' }}">
 @endsection
@@ -37,7 +37,7 @@
                     <div class="my-5">
                         <h1>{{ $post->title }}</h1>
                         <small class="text-comment"> Penulis : {{ $post->user->name }};
-                            Kategori : 
+                            Kategori :
                             @foreach ($post->categories as $category)
                             <a href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
                             @endforeach
