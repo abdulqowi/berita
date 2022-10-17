@@ -49,7 +49,7 @@ class BlogController extends Controller
             'meta_keyword' =>request('meta_keyword'),
         ]);
 
-        // $blog->categories()->sync(request('category'));
+        $blog->categories()->sync(request('category'));
         flash('Data berhasil ditambahkan!');
         return redirect()->route('blogs.index');
     }
